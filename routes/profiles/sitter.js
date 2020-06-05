@@ -3,32 +3,9 @@ const router = express.Router();
 const NewSitterProfile = require('../../models/AdminProfiles');
 
 
-///get sitter profile
-router.get('/', (req, res) => {
-    const sitter = NewSitterProfile.find()
-    sitter.then(data => {
-        res.json(data);
-    })
-    .catch(err => {
-        res.json({message: err})
-    })
-});
-
-router.get('/:id', (req, res) => {
-    const sitterID = req.params.id;
-    const sitter = NewSitterProfile.findById(sitterID)
-    sitter.then(data => {
-        res.json(data);
-    })
-    .catch(err => {
-        res.json({message: err})
-    })
-});
-
-
 
 ///ROUTES POST SITTER PROFILE
-router.post('/newsitter', (req, res) => {
+router.post('/new', (req, res) => {
     const newSitter = new NewSitterProfile({
         name: req.body.name,
         bio: req.body.bio,
@@ -54,7 +31,7 @@ router.post('/newsitter', (req, res) => {
 
 
 //ROUTE EDIT SITTER PROFILE
-router.post('/editprofile/:id', (req, res) => {
+router.post('/edit/:id', (req, res) => {
     const sitterID = req.params.id;
 
     const newName = req.body.name;
@@ -90,7 +67,7 @@ router.post('/editprofile/:id', (req, res) => {
 
 //ROUTE DELETE SITTER PROFILE
 
-router.delete('/remove/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     const id = req.params.id;
     NewSitterProfile.findByIdAndRemove(id)
     .then(result => {

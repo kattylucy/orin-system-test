@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
 
 
 ///ROUTES POST JOBS
-router.post('/newjob', (req, res) => {
+router.post('/new', (req, res) => {
     const newJob = new NewJob({
         title: req.body.title,
         description: req.body.description,
@@ -52,7 +52,7 @@ router.post('/newjob', (req, res) => {
 
 
 //ROUTE EDIT JOB 
-router.post('/editjob/:id', (req, res) => {
+router.post('/edit/:id', (req, res) => {
     const jobID = req.params.id;
 
     const newtTitle = req.body.title;
@@ -87,7 +87,7 @@ router.post('/editjob/:id', (req, res) => {
 
 
 //ROUTE DELETE JOB 
-router.delete('/remove/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     const jobID = req.params.id;
     NewJob.findByIdAndRemove(jobID)
     .then(result => {

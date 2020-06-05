@@ -7,7 +7,10 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 
+///PORT
 const PORT = process.env.PORT || 3000;
+
+///ENV
 require('dotenv/config');
 
 ///pasport config
@@ -39,11 +42,17 @@ app.use('/signup', signup);
 const login = require('./routes/auth/login');
 app.use('/login', login);
 
+const userRoutes = require('./routes/users/users');
+app.use('/users', userRoutes);
+
 const jobsRoutes = require('./routes/jobs/jobs');
 app.use('/jobs', jobsRoutes);
 
 const sitterProfiles = require('./routes/profiles/sitter');
 app.use('/sitter', sitterProfiles);
+
+const companyProfiles = require('./routes/agencies/admin');
+app.use('/agency', companyProfiles);
 
 
 ///middlewares - function that executes when we hit a route
